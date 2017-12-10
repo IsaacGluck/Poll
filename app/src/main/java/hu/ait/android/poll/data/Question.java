@@ -6,10 +6,10 @@ public class Question {
     private String uid;
     private String author;
     private String question;
-    private String[] answers;
+    private HashMap<String, String> answers;
     private HashMap<String, String> answeredBy;
 
-    public Question(String uid, String author, String question, String[] answers, HashMap<String, String> answeredBy) {
+    public Question(String uid, String author, String question, HashMap<String, String> answers, HashMap<String, String> answeredBy) {
         this.uid = uid;
         this.author = author;
         this.question = question;
@@ -43,11 +43,11 @@ public class Question {
         this.question = question;
     }
 
-    public String[] getAnswers() {
+    public HashMap<String, String> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(String[] answers) {
+    public void setAnswers(HashMap<String, String> answers) {
         this.answers = answers;
     }
 
