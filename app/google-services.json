@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "1081802734601-o0gj920jogfd0mvodpb8n98giaggljep.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "hu.ait.android.poll",
-            "certificate_hash": "c5eb56e536d34bd0f741d92fade357a1f2a2769a"
-          }
-        },
-        {
           "client_id": "1081802734601-ts3utu25gohv1n07qvk232vvbqrp7f2v.apps.googleusercontent.com",
           "client_type": 3
         }
