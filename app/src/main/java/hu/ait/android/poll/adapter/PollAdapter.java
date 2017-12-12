@@ -75,6 +75,7 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
         holder.radioAnswer4.setId(RB4_ID);
 
         final DatabaseReference database = this.pollRef;
+        final FirebaseUser userKey = this.user;
 
         holder.btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,9 +88,14 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
 
                 String answerKey = "AnswerIndex" + checkedRadioIndex;
                 answers.get(answerKey).setNumAnswers(answers.get(answerKey).getNumAnswers() + 1);
-                database.child("polls").child(question.getKey()).setValue(question);
 
-//                question.getAnsweredBy().put(userID, "");
+                if (question.getAnsweredBy() == null) {
+                    HashMap<String, String> answeredBy = new HashMap<>();
+                    question.setAnsweredBy(answeredBy);
+                }
+                question.getAnsweredBy().put(userKey.getUid(), "");
+
+                database.child("polls").child(question.getKey()).setValue(question);
                 submitAnswer();
             }
         });

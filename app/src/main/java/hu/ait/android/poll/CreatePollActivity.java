@@ -73,13 +73,13 @@ public class CreatePollActivity extends AppCompatActivity {
         if (isEmpty) return;
 
 
-        HashMap<String, Answer> answers = new HashMap<String, Answer>();
+        HashMap<String, Answer> answers = new HashMap<>();
         answers.put("AnswerIndex0", new Answer(etAnswer1.getText().toString()));
         answers.put("AnswerIndex1", new Answer(etAnswer2.getText().toString()));
         answers.put("AnswerIndex2", new Answer(etAnswer3.getText().toString()));
         answers.put("AnswerIndex3", new Answer(etAnswer4.getText().toString()));
 
-        HashMap<String, String> answeredBy = new HashMap<String, String>();
+        HashMap<String, String> answeredBy = new HashMap<>();
 
         String key = FirebaseDatabase.getInstance().getReference().child("polls").push().getKey();
         Question newQuestion = new Question(
