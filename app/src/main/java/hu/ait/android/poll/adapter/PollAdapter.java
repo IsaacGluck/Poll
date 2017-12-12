@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import hu.ait.android.poll.R;
+import hu.ait.android.poll.data.Answer;
 import hu.ait.android.poll.data.Question;
 
 
@@ -48,26 +49,31 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         final Question question = pollList.get(position);
-
         holder.tvAuthor.setText(question.getAuthor());
         holder.tvQuestion.setText(question.getQuestion());
 
-        HashMap<String, String> answers = question.getAnswers();
+        final String userID = this.uId;
 
-        holder.radioAnswer1.setText(answers.get("AnswerIndex0"));
-        holder.radioAnswer2.setText(answers.get("AnswerIndex1"));
-        holder.radioAnswer3.setText(answers.get("AnswerIndex2"));
-        holder.radioAnswer4.setText(answers.get("AnswerIndex3"));
 
-//        holder.btnSubmit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                submitAnswer(holder.getAdapterPosition(), pollKeys.get(holder.getAdapterPosition()));
-//            }
-//        });
+        final HashMap<String, Answer> answers = question.getAnswers();
+        holder.radioAnswer1.setText(answers.get("AnswerIndex0").getAnswerText());
+        holder.radioAnswer2.setText(answers.get("AnswerIndex1").getAnswerText());
+        holder.radioAnswer3.setText(answers.get("AnswerIndex2").getAnswerText());
+        holder.radioAnswer4.setText(answers.get("AnswerIndex3").getAnswerText());
 
+        holder.btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                int checkedRadioIndex = holder.radioAnswers.getCheckedRadioButtonId();
+//                String answerKey = "AnswerIndex" + ;
+//                holder.radioAnswer1.setText(answerKey);
+//                answers.get(answerKey).setNumAnswers(answers.get(answerKey).getNumAnswers() + 1);
+//                question.getAnsweredBy().put(userID, "");
+                submitAnswer();
+            }
+        });
 
 //        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -75,13 +81,16 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
 //                removeQuestion(holder.getAdapterPosition(), pollKeys.get(holder.getAdapterPosition()));
 //            }
 //        });
-
     }
 
     public void addPost(Question poll, String key) {
         pollList.add(poll);
         pollKeys.add(key);
         notifyDataSetChanged();
+    }
+
+    public void submitAnswer() {
+
     }
 
     @Override
@@ -108,7 +117,7 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
             radioAnswer2 = itemView.findViewById(R.id.radioAnswer2);
             radioAnswer3 = itemView.findViewById(R.id.radioAnswer3);
             radioAnswer4 = itemView.findViewById(R.id.radioAnswer4);
-            btnSubmit = itemView.findViewById(R.id.btnDelete);
+            btnSubmit = itemView.findViewById(R.id.btnSubmitAnswer);
             btnDelete = itemView.findViewById(R.id.btnDelete);
         }
     }

@@ -19,6 +19,7 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import hu.ait.android.poll.data.Answer;
 import hu.ait.android.poll.data.Question;
 
 public class CreatePollActivity extends AppCompatActivity {
@@ -48,11 +49,12 @@ public class CreatePollActivity extends AppCompatActivity {
     @OnClick(R.id.btnAsk)
     public void askQuestion() {
         String key = FirebaseDatabase.getInstance().getReference().child("polls").push().getKey();
-        HashMap<String, String> answers = new HashMap<String, String>();
-        answers.put("AnswerIndex0", etAnswer1.getText().toString());
-        answers.put("AnswerIndex1", etAnswer2.getText().toString());
-        answers.put("AnswerIndex2", etAnswer3.getText().toString());
-        answers.put("AnswerIndex3", etAnswer4.getText().toString());
+        HashMap<String, Answer> answers = new HashMap<String, Answer>();
+
+        answers.put("AnswerIndex0", new Answer(etAnswer1.getText().toString()));
+        answers.put("AnswerIndex1", new Answer(etAnswer2.getText().toString()));
+        answers.put("AnswerIndex2", new Answer(etAnswer3.getText().toString()));
+        answers.put("AnswerIndex3", new Answer(etAnswer4.getText().toString()));
 
         HashMap<String, String> answeredBy = new HashMap<String, String>();
 
