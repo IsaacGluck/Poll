@@ -4,14 +4,16 @@ import java.util.HashMap;
 
 public class Question {
     private String uid;
+    private String key;
     private String author;
     private String question;
     private HashMap<String, Answer> answers;
     private HashMap<String, String> answeredBy;
 
 
-    public Question(String uid, String author, String question, HashMap<String, Answer> answers, HashMap<String, String> answeredBy) {
+    public Question(String uid, String key, String author, String question, HashMap<String, Answer> answers, HashMap<String, String> answeredBy) {
         this.uid = uid;
+        this.key = key;
         this.author = author;
         this.question = question;
         this.answers = answers;
@@ -26,6 +28,14 @@ public class Question {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getAuthor() {

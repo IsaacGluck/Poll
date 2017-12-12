@@ -10,6 +10,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -24,21 +26,24 @@ import hu.ait.android.poll.data.Question;
 
 public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
 
-    private static final int RB1_ID = 1;
-    private static final int RB2_ID = 2;
-    private static final int RB3_ID = 3;
-    private static final int RB4_ID = 4;
+    private static final int RB1_ID = 0;
+    private static final int RB2_ID = 1;
+    private static final int RB3_ID = 2;
+    private static final int RB4_ID = 3;
 
     private Context context;
     private List<Question> pollList;
     private List<String> pollKeys;
     private String uId;
+    private FirebaseUser user;
     private int lastPosition = -1;
     private DatabaseReference pollRef;
 
     public PollAdapter(Context context, String uId) {
         this.context = context;
         this.uId = uId;
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         pollList = new ArrayList<Question>();
         pollKeys = new ArrayList<String>();
@@ -59,9 +64,6 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
         holder.tvAuthor.setText(question.getAuthor());
         holder.tvQuestion.setText(question.getQuestion());
 
-        final String userID = this.uId;
-
-
         final HashMap<String, Answer> answers = question.getAnswers();
         holder.radioAnswer1.setText(answers.get("AnswerIndex0").getAnswerText());
         holder.radioAnswer1.setId(RB1_ID);
@@ -72,6 +74,8 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
         holder.radioAnswer4.setText(answers.get("AnswerIndex3").getAnswerText());
         holder.radioAnswer4.setId(RB4_ID);
 
+        final DatabaseReference database = this.pollRef;
+
         holder.btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,9 +84,11 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
                 if (checkedRadioIndex == -1) {
                     return; // @DERS make a toast to say you have to choose an answer
                 }
-                String answerKey = String.valueOf(checkedRadioIndex); // "AnswerIndex" +
-                holder.radioAnswer1.setText(answerKey);
-//                answers.get(answerKey).setNumAnswers(answers.get(answerKey).getNumAnswers() + 1);
+
+                String answerKey = "AnswerIndex" + checkedRadioIndex;
+                answers.get(answerKey).setNumAnswers(answers.get(answerKey).getNumAnswers() + 1);
+                database.child("polls").child(question.getKey()).setValue(question);
+
 //                question.getAnsweredBy().put(userID, "");
                 submitAnswer();
             }

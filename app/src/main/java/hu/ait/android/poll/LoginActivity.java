@@ -115,8 +115,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-
-
     private void displayUsername(FirebaseUser user) {
         user.updateProfile(new UserProfileChangeRequest.Builder().
                 setDisplayName(usernameFromEmail(user.getEmail())).build());
