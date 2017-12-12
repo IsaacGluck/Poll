@@ -13,12 +13,21 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
-        <ImageView android:src="@mipmap/ic_launcher"
-            android:layout_width="wrap_content"
-            android:layout_height="72dp"
+        <ImageView android:src="@drawable/chart"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginBottom="24dp"
             android:layout_gravity="center_horizontal"
+            android:scaleType="fitXY"
             android:contentDescription="Login Image"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:textColor="#2c3e50"
+            android:layout_gravity="center"
+            android:text="Ballot Box"/>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
