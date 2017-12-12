@@ -3,6 +3,7 @@ package hu.ait.android.poll;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,6 +49,29 @@ public class CreatePollActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnAsk)
     public void askQuestion() {
+        boolean isEmpty = false;
+        if(TextUtils.isEmpty(etQuestion.getText().toString())) {
+            etQuestion.setError("Field cannot be empty");
+            isEmpty = true;
+        }
+        if(TextUtils.isEmpty(etAnswer1.getText().toString())) {
+            etAnswer1.setError("Field cannot be empty");
+            isEmpty = true;
+        }
+        if(TextUtils.isEmpty(etAnswer2.getText().toString())) {
+            etAnswer2.setError("Field cannot be empty");
+            isEmpty = true;
+        }
+        if(TextUtils.isEmpty(etAnswer3.getText().toString())) {
+            etAnswer3.setError("Field cannot be empty");
+            isEmpty = true;
+        }
+        if(TextUtils.isEmpty(etAnswer4.getText().toString())) {
+            etAnswer4.setError("Field cannot be empty");
+            isEmpty = true;
+        }
+        if (isEmpty) return;
+
         String key = FirebaseDatabase.getInstance().getReference().child("polls").push().getKey();
         HashMap<String, Answer> answers = new HashMap<String, Answer>();
 
