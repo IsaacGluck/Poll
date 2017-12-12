@@ -24,6 +24,11 @@ import hu.ait.android.poll.data.Question;
 
 public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
 
+    private static final int RB1_ID = 1;
+    private static final int RB2_ID = 2;
+    private static final int RB3_ID = 3;
+    private static final int RB4_ID = 4;
+
     private Context context;
     private List<Question> pollList;
     private List<String> pollKeys;
@@ -59,16 +64,24 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
 
         final HashMap<String, Answer> answers = question.getAnswers();
         holder.radioAnswer1.setText(answers.get("AnswerIndex0").getAnswerText());
+        holder.radioAnswer1.setId(RB1_ID);
         holder.radioAnswer2.setText(answers.get("AnswerIndex1").getAnswerText());
+        holder.radioAnswer2.setId(RB2_ID);
         holder.radioAnswer3.setText(answers.get("AnswerIndex2").getAnswerText());
+        holder.radioAnswer3.setId(RB3_ID);
         holder.radioAnswer4.setText(answers.get("AnswerIndex3").getAnswerText());
+        holder.radioAnswer4.setId(RB4_ID);
 
         holder.btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                int checkedRadioIndex = holder.radioAnswers.getCheckedRadioButtonId();
-//                String answerKey = "AnswerIndex" + ;
-//                holder.radioAnswer1.setText(answerKey);
+                int checkedRadioIndex = holder.radioAnswers.getCheckedRadioButtonId();
+
+                if (checkedRadioIndex == -1) {
+                    return; // @DERS make a toast to say you have to choose an answer
+                }
+                String answerKey = String.valueOf(checkedRadioIndex); // "AnswerIndex" +
+                holder.radioAnswer1.setText(answerKey);
 //                answers.get(answerKey).setNumAnswers(answers.get(answerKey).getNumAnswers() + 1);
 //                question.getAnsweredBy().put(userID, "");
                 submitAnswer();
