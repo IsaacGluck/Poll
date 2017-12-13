@@ -18,11 +18,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import hu.ait.android.poll.AnswerQuestionActivity;
 import hu.ait.android.poll.PollActivity;
+import hu.ait.android.poll.QuestionResultsActivity;
 import hu.ait.android.poll.R;
+import hu.ait.android.poll.data.Answer;
 import hu.ait.android.poll.data.Question;
 
 
@@ -66,7 +69,7 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Question question = pollList.get(position);
         holder.tvAuthor.setText(question.getAuthor());
         holder.tvQuestion.setText(question.getQuestion());
@@ -82,22 +85,57 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
         final DatabaseReference database = this.pollRef;
         final FirebaseUser userKey = this.user;
 
-        holder.btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, AnswerQuestionActivity.class);
-                intent.putExtra(PollActivity.ANSWER_INDEX_0, holder.answer1);
-                intent.putExtra(PollActivity.ANSWER_INDEX_1, holder.answer2);
-                intent.putExtra(PollActivity.ANSWER_INDEX_2, holder.answer3);
-                intent.putExtra(PollActivity.ANSWER_INDEX_3, holder.answer4);
-                intent.putExtra(PollActivity.AUTHOR, holder.author);
-                intent.putExtra(PollActivity.QUESTON, holder.question);
-                intent.putExtra(PollActivity.HOLDER_POSITION, holder.position);
-
-                holder.intent = intent;
-                ((Activity)context).startActivityForResult(intent, MY_REQUEST_CODE);
+        boolean hasAnswered = false;
+        if (this.pollList.get(position).getAnsweredBy() != null) {
+            if (this.pollList.get(position).getAnsweredBy().containsKey(this.uId)) {
+                hasAnswered = true;
             }
-        });
+        }
+
+        if (hasAnswered) {
+            holder.btnSubmit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, QuestionResultsActivity.class);
+                    final HashMap<String, Answer> answers = pollList.get(position).getAnswers();
+                    intent.putExtra(PollActivity.ANSWER1, answers.get(PollActivity.ANSWER_INDEX_0).getAnswerText());
+                    intent.putExtra(PollActivity.ANSWER1_COUNT, answers.get(PollActivity.ANSWER_INDEX_0).getNumAnswers());
+
+                    intent.putExtra(PollActivity.ANSWER2, answers.get(PollActivity.ANSWER_INDEX_1).getAnswerText());
+                    intent.putExtra(PollActivity.ANSWER2_COUNT, answers.get(PollActivity.ANSWER_INDEX_1).getNumAnswers());
+
+                    intent.putExtra(PollActivity.ANSWER3, answers.get(PollActivity.ANSWER_INDEX_2).getAnswerText());
+                    intent.putExtra(PollActivity.ANSWER3_COUNT, answers.get(PollActivity.ANSWER_INDEX_2).getNumAnswers());
+
+                    intent.putExtra(PollActivity.ANSWER4, answers.get(PollActivity.ANSWER_INDEX_3).getAnswerText());
+                    intent.putExtra(PollActivity.ANSWER4_COUNT, answers.get(PollActivity.ANSWER_INDEX_3).getNumAnswers());
+
+                    intent.putExtra(PollActivity.QUESTON, holder.question);
+                    context.startActivity(intent);
+                }
+            });
+            holder.btnSubmit.setText("View Results");
+        } else {
+            holder.btnSubmit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, AnswerQuestionActivity.class);
+                    intent.putExtra(PollActivity.ANSWER_INDEX_0, holder.answer1);
+                    intent.putExtra(PollActivity.ANSWER_INDEX_1, holder.answer2);
+                    intent.putExtra(PollActivity.ANSWER_INDEX_2, holder.answer3);
+                    intent.putExtra(PollActivity.ANSWER_INDEX_3, holder.answer4);
+                    intent.putExtra(PollActivity.AUTHOR, holder.author);
+                    intent.putExtra(PollActivity.QUESTON, holder.question);
+                    intent.putExtra(PollActivity.HOLDER_POSITION, holder.position);
+
+                    holder.intent = intent;
+                    ((Activity)context).startActivityForResult(intent, MY_REQUEST_CODE);
+
+                }
+            });
+        }
+
+
 
 
     }
@@ -118,11 +156,7 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvAuthor;
         public TextView tvQuestion;
-//        public RadioGroup radioAnswers;
-//        public RadioButton radioAnswer1;
-//        public RadioButton radioAnswer2;
-//        public RadioButton radioAnswer3;
-//        public RadioButton radioAnswer4;
+
         public String answer1;
         public String answer2;
         public String answer3;

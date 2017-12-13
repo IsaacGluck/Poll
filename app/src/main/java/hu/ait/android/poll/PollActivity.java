@@ -46,6 +46,14 @@ public class PollActivity extends AppCompatActivity
     public static final String QUESTON = "QUESTION";
     public static final String ANSWER_INDEX = "ANSWER_INDEX";
     public static final String HOLDER_POSITION = "HOLDER_POSITION";
+    public static final String ANSWER1 = "ANSWER1";
+    public static final String ANSWER2 = "ANSWER2";
+    public static final String ANSWER3 = "ANSWER3";
+    public static final String ANSWER4 = "ANSWER4";
+    public static final String ANSWER1_COUNT = "ANSWER1_COUNT";
+    public static final String ANSWER2_COUNT = "ANSWER2_COUNT";
+    public static final String ANSWER3_COUNT = "ANSWER3_COUNT";
+    public static final String ANSWER4_COUNT = "ANSWER4_COUNT";
 
 
     @Override
@@ -177,6 +185,7 @@ public class PollActivity extends AppCompatActivity
                 q.getAnsweredBy().put(adapter.user.getUid(), "");
 
                 adapter.pollRef.child("polls").child(q.getKey()).setValue(q);
+                adapter.notifyItemChanged(questionPos);
 
             } else {
                 Log.d("GETTING POSITION FAILED", "BOOOOOOOOO");

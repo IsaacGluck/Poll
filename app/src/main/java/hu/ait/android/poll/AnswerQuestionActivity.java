@@ -57,11 +57,11 @@ public class AnswerQuestionActivity extends AppCompatActivity {
 
         radioAnswer1.setText(getIntent().getStringExtra(PollActivity.ANSWER_INDEX_0));
         radioAnswer1.setId(RB1_ID);
-        radioAnswer2.setText(getIntent().getStringExtra(PollActivity.ANSWER_INDEX_0));
+        radioAnswer2.setText(getIntent().getStringExtra(PollActivity.ANSWER_INDEX_1));
         radioAnswer2.setId(RB2_ID);
-        radioAnswer3.setText(getIntent().getStringExtra(PollActivity.ANSWER_INDEX_0));
+        radioAnswer3.setText(getIntent().getStringExtra(PollActivity.ANSWER_INDEX_2));
         radioAnswer3.setId(RB3_ID);
-        radioAnswer4.setText(getIntent().getStringExtra(PollActivity.ANSWER_INDEX_0));
+        radioAnswer4.setText(getIntent().getStringExtra(PollActivity.ANSWER_INDEX_3));
         radioAnswer4.setId(RB4_ID);
         tvAuthor.setText(getIntent().getStringExtra(PollActivity.AUTHOR));
         tvQuestion.setText(getIntent().getStringExtra(PollActivity.QUESTON));
