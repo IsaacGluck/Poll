@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -24,8 +25,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+
 import butterknife.ButterKnife;
 import hu.ait.android.poll.adapter.PollAdapter;
+import hu.ait.android.poll.data.Answer;
 import hu.ait.android.poll.data.Question;
 
 public class PollActivity extends AppCompatActivity
@@ -33,6 +37,15 @@ public class PollActivity extends AppCompatActivity
 
     private PollAdapter adapter;
     private DrawerLayout drawer;
+
+    public static final String ANSWER_INDEX_0 = "AnswerIndex0";
+    public static final String ANSWER_INDEX_1 = "AnswerIndex1";
+    public static final String ANSWER_INDEX_2 = "AnswerIndex2";
+    public static final String ANSWER_INDEX_3 = "AnswerIndex3";
+    public static final String AUTHOR = "AUTHOR";
+    public static final String QUESTON = "QUESTION";
+    public static final String ANSWER_INDEX = "ANSWER_INDEX";
+    public static final String HOLDER_POSITION = "HOLDER_POSITION";
 
 
     @Override
@@ -77,6 +90,7 @@ public class PollActivity extends AppCompatActivity
 
         initPollListener();
     }
+
 
     private void initPollListener() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("polls");
@@ -135,6 +149,39 @@ public class PollActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_CANCELED) {
+            Log.d("GETTSITION FAILED!", "BOOOOOOOOO!");
+            return;
+        }
+        if (requestCode == PollAdapter.MY_REQUEST_CODE) {
+            if (!data.hasExtra(PollActivity.ANSWER_INDEX)) return;
+            int questionPos = data.getIntExtra(PollActivity.HOLDER_POSITION, -1);
+            if (questionPos != -1) {
+                Question q = adapter.getPollList().get(questionPos);
+                String answerKey = data.getStringExtra(PollActivity.ANSWER_INDEX);
+                Log.d("ANSWER_KEY", answerKey);
+                final HashMap<String, Answer> answers = q.getAnswers();
+                answers.get(answerKey).setNumAnswers(answers.get(answerKey).getNumAnswers() + 1);
+
+                if (q.getAnsweredBy() == null) {
+                    HashMap<String, String> answeredBy = new HashMap<>();
+                    q.setAnsweredBy(answeredBy);
+                }
+                q.getAnsweredBy().put(adapter.user.getUid(), "");
+
+                adapter.pollRef.child("polls").child(q.getKey()).setValue(q);
+
+            } else {
+                Log.d("GETTING POSITION FAILED", "BOOOOOOOOO");
+            }
+        }
     }
 
     private void showSnackBarMessage(String message) {

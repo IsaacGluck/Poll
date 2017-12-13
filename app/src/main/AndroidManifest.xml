@@ -20,7 +20,8 @@
             android:name=".PollActivity"
             android:label="@string/title_activity_poll"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".CreatePollActivity"></activity>
+        <activity android:name=".CreatePollActivity" />
+        <activity android:name=".AnswerQuestionActivity"></activity>
     </application>
 
 </manifest>
