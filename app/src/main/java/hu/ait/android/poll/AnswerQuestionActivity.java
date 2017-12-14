@@ -4,17 +4,12 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
-import java.util.HashMap;
-
-import hu.ait.android.poll.data.Answer;
 
 public class AnswerQuestionActivity extends AppCompatActivity {
     public TextView tvAuthor;
@@ -66,7 +61,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
         radioAnswer4.setText(getIntent().getStringExtra(PollActivity.ANSWER_INDEX_3));
         radioAnswer4.setId(RB4_ID);
         tvAuthor.setText(getIntent().getStringExtra(PollActivity.AUTHOR));
-        tvQuestion.setText(getIntent().getStringExtra(PollActivity.QUESTON));
+        tvQuestion.setText(getIntent().getStringExtra(PollActivity.QUESTION));
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override

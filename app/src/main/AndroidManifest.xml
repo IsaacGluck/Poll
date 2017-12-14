@@ -22,7 +22,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CreatePollActivity" />
         <activity android:name=".AnswerQuestionActivity" />
-        <activity android:name=".QuestionResultsActivity"></activity>
+        <activity android:name=".QuestionResultsActivity" />
     </application>
 
 </manifest>

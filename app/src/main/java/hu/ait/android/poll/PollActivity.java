@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -43,7 +42,7 @@ public class PollActivity extends AppCompatActivity
     public static final String ANSWER_INDEX_2 = "AnswerIndex2";
     public static final String ANSWER_INDEX_3 = "AnswerIndex3";
     public static final String AUTHOR = "AUTHOR";
-    public static final String QUESTON = "QUESTION";
+    public static final String QUESTION = "QUESTION";
     public static final String ANSWER_INDEX = "ANSWER_INDEX";
     public static final String HOLDER_POSITION = "HOLDER_POSITION";
     public static final String ANSWER1 = "ANSWER1";

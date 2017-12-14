@@ -98,7 +98,7 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
                     intent.putExtra(PollActivity.ANSWER4, answers.get(PollActivity.ANSWER_INDEX_3).getAnswerText());
                     intent.putExtra(PollActivity.ANSWER4_COUNT, answers.get(PollActivity.ANSWER_INDEX_3).getNumAnswers());
 
-                    intent.putExtra(PollActivity.QUESTON, holder.question);
+                    intent.putExtra(PollActivity.QUESTION, holder.question);
                     context.startActivity(intent);
                 }
             });
@@ -113,7 +113,7 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
                     intent.putExtra(PollActivity.ANSWER_INDEX_2, holder.answer3);
                     intent.putExtra(PollActivity.ANSWER_INDEX_3, holder.answer4);
                     intent.putExtra(PollActivity.AUTHOR, holder.author);
-                    intent.putExtra(PollActivity.QUESTON, holder.question);
+                    intent.putExtra(PollActivity.QUESTION, holder.question);
                     intent.putExtra(PollActivity.HOLDER_POSITION, holder.position);
 
                     holder.intent = intent;
