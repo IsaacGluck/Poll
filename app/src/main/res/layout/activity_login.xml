@@ -19,15 +19,15 @@
             android:layout_marginBottom="24dp"
             android:layout_gravity="center_horizontal"
             android:scaleType="fitXY"
-            android:contentDescription="Login Image"/>
+            android:contentDescription="@string/login_image"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="#2c3e50"
             android:layout_gravity="center"
-            android:text="Ballot Box"/>
+            android:text="@string/ballot_box"/>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -38,8 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:text="test@gmail.com"
-                android:hint="email" />
+                android:hint="@string/email" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -51,8 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:text="tester1"
-                android:hint="Password"/>
+                android:hint="@string/password"/>
         </android.support.design.widget.TextInputLayout>
 
         <Button
@@ -62,14 +60,14 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="12dp"
             android:padding="12dp"
-            android:text="Login"/>
+            android:text="@string/login"/>
 
         <Button
             android:id="@+id/btnRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:text="Register"/>
+            android:text="@string/register"/>
 
     </LinearLayout>
 </ScrollView>

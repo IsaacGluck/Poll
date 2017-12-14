@@ -18,8 +18,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="QUESTION TITLE"
-            android:textSize="26dp"
+            android:text="@string/question_title_default"
+            android:textSize="26sp"
             android:textColor="#2c3e50"
             android:id="@+id/tv_question"/>
 
@@ -43,25 +43,25 @@
             android:layout_width="0dp"
             android:layout_weight="22"
             android:layout_height="wrap_content"
-            android:text="one"
+            android:text="@string/one"
             android:id="@+id/tv1"/>
         <TextView
             android:layout_width="0dp"
             android:layout_weight="22"
             android:layout_height="wrap_content"
-            android:text="two"
+            android:text="@string/two"
             android:id="@+id/tv2"/>
         <TextView
             android:layout_width="0dp"
             android:layout_weight="22"
             android:layout_height="wrap_content"
-            android:text="three"
+            android:text="@string/three"
             android:id="@+id/tv3"/>
         <TextView
             android:layout_width="0dp"
             android:layout_weight="22"
             android:layout_height="wrap_content"
-            android:text="four"
+            android:text="@string/four"
             android:id="@+id/tv4"/>
 
     </LinearLayout>
