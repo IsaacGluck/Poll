@@ -5,13 +5,4 @@
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
     <string name="Hide">Hide</string>
     <string name="txt_about">Ballot Box was made by Andy and Isaac</string>
-    <string name="PleaseSelectAnAnswer">Please select an answer</string>
-    <string name="FieldCannotBeEmpty">Field cannot be empty</string>
-    <string name="PostCreated">Post created</string>
-    <string name="RegistrationOK">Registration ok</string>
-    <string name="AuthenticationFailed">Authentication failed. Error:</string>
-    <string name="EmailCannotBeEmpty">The email can not be empty</string>
-    <string name="PasswordCannotBeEmpty">The password can not be empty</string>
-    <string name="HoldOn">Hold On...</string>
-    <string name="Error">Error:</string>
 </resources>
