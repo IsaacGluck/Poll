@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -80,6 +81,7 @@ public class CreatePollActivity extends AppCompatActivity {
         HashMap<String, String> answeredBy = new HashMap<>();
 
         String key = FirebaseDatabase.getInstance().getReference().child(PollActivity.POLLS).push().getKey();
+        Log.d("AUTHOR", FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
         Question newQuestion = new Question(
                 FirebaseAuth.getInstance().getCurrentUser().getUid(),
                 key,

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -107,6 +108,7 @@ public class PollActivity extends AppCompatActivity
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Question question = dataSnapshot.getValue(Question.class);
                 adapter.addPost(question, dataSnapshot.getKey());
+//                Log.d("AUTHOR", question.getAuthor());
             }
 
             @Override
