@@ -8,21 +8,18 @@
     <string name="PleaseSelectAnAnswer">Please select an answer</string>
     <string name="FieldCannotBeEmpty">Field cannot be empty</string>
     <string name="PostCreated">Post created</string>
-    <string name="RegistrationOK">Registration ok</string>
+    <string name="RegistrationOK">Registration OK</string>
     <string name="AuthenticationFailed">Authentication failed. Error:</string>
     <string name="EmailCannotBeEmpty">The email can not be empty</string>
     <string name="PasswordCannotBeEmpty">The password can not be empty</string>
-    <string name="HoldOn">Hold On...</string>
+    <string name="HoldOn">Hold On…</string>
     <string name="Error">Error:</string>
     <string name="view_results">View Results</string>
-    <string name="question">Question</string>
     <string name="answer_1">Answer 1</string>
     <string name="answer_2">Answer 2</string>
     <string name="answer_3">Answer 3</string>
     <string name="answer_4">Answer 4</string>
     <string name="ask">Ask</string>
-    <string name="answer">Answer</string>
-    <string name="author">Author</string>
     <string name="login_image">Login Image</string>
     <string name="ballot_box">Ballot Box</string>
     <string name="email">Email</string>
@@ -40,4 +37,6 @@
     <string name="answer">Answer</string>
     <string name="author">Author</string>
     <string name="delete">Delete</string>
+    <string name="logout">Logout</string>
+    <string name="about">About</string>
 </resources>
