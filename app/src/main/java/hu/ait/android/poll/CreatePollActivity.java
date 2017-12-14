@@ -51,37 +51,37 @@ public class CreatePollActivity extends AppCompatActivity {
     public void askQuestion() {
         boolean isEmpty = false;
         if(TextUtils.isEmpty(etQuestion.getText().toString())) {
-            etQuestion.setError("Field cannot be empty");
+            etQuestion.setError(getString(R.string.FieldCannotBeEmpty));
             isEmpty = true;
         }
         if(TextUtils.isEmpty(etAnswer1.getText().toString())) {
-            etAnswer1.setError("Field cannot be empty");
+            etAnswer1.setError(getString(R.string.FieldCannotBeEmpty));
             isEmpty = true;
         }
         if(TextUtils.isEmpty(etAnswer2.getText().toString())) {
-            etAnswer2.setError("Field cannot be empty");
+            etAnswer2.setError(getString(R.string.FieldCannotBeEmpty));
             isEmpty = true;
         }
         if(TextUtils.isEmpty(etAnswer3.getText().toString())) {
-            etAnswer3.setError("Field cannot be empty");
+            etAnswer3.setError(getString(R.string.FieldCannotBeEmpty));
             isEmpty = true;
         }
         if(TextUtils.isEmpty(etAnswer4.getText().toString())) {
-            etAnswer4.setError("Field cannot be empty");
+            etAnswer4.setError(getString(R.string.FieldCannotBeEmpty));
             isEmpty = true;
         }
         if (isEmpty) return;
 
 
         HashMap<String, Answer> answers = new HashMap<>();
-        answers.put("AnswerIndex0", new Answer(etAnswer1.getText().toString()));
-        answers.put("AnswerIndex1", new Answer(etAnswer2.getText().toString()));
-        answers.put("AnswerIndex2", new Answer(etAnswer3.getText().toString()));
-        answers.put("AnswerIndex3", new Answer(etAnswer4.getText().toString()));
+        answers.put(PollActivity.ANSWER_INDEX_0, new Answer(etAnswer1.getText().toString()));
+        answers.put(PollActivity.ANSWER_INDEX_1, new Answer(etAnswer2.getText().toString()));
+        answers.put(PollActivity.ANSWER_INDEX_2, new Answer(etAnswer3.getText().toString()));
+        answers.put(PollActivity.ANSWER_INDEX_3, new Answer(etAnswer4.getText().toString()));
 
         HashMap<String, String> answeredBy = new HashMap<>();
 
-        String key = FirebaseDatabase.getInstance().getReference().child("polls").push().getKey();
+        String key = FirebaseDatabase.getInstance().getReference().child(PollActivity.POLLS).push().getKey();
         Question newQuestion = new Question(
                 FirebaseAuth.getInstance().getCurrentUser().getUid(),
                 key,
@@ -90,11 +90,11 @@ public class CreatePollActivity extends AppCompatActivity {
                 answers,
                 answeredBy);
 
-        FirebaseDatabase.getInstance().getReference().child("polls").child(key)
+        FirebaseDatabase.getInstance().getReference().child(PollActivity.POLLS).child(key)
                 .setValue(newQuestion).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(CreatePollActivity.this, "Post created", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreatePollActivity.this, R.string.PostCreated, Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

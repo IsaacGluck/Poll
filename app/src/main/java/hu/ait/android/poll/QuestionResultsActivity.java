@@ -1,28 +1,19 @@
 package hu.ait.android.poll;
 
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.LimitLine;
-import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import hu.ait.android.poll.data.Question;
-import hu.ait.android.poll.graph.axisFormatter;
 
 public class QuestionResultsActivity extends AppCompatActivity {
 
@@ -56,7 +47,7 @@ public class QuestionResultsActivity extends AppCompatActivity {
         entries.add(new BarEntry(2, getIntent().getIntExtra(PollActivity.ANSWER3_COUNT, -1)));
         entries.add(new BarEntry(3, getIntent().getIntExtra(PollActivity.ANSWER4_COUNT, -1)));
 
-        BarDataSet dataset = new BarDataSet(entries, "# of Calls");
+        BarDataSet dataset = new BarDataSet(entries, "");
         dataset.setColors(ColorTemplate.COLORFUL_COLORS);
 
         chart = findViewById(R.id.chart);

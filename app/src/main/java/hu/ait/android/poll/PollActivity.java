@@ -54,6 +54,7 @@ public class PollActivity extends AppCompatActivity
     public static final String ANSWER2_COUNT = "ANSWER2_COUNT";
     public static final String ANSWER3_COUNT = "ANSWER3_COUNT";
     public static final String ANSWER4_COUNT = "ANSWER4_COUNT";
+    public static final String POLLS = "polls";
 
 
     @Override
@@ -165,7 +166,6 @@ public class PollActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_CANCELED) {
-            Log.d("GETTSITION FAILED!", "BOOOOOOOOO!");
             return;
         }
         if (requestCode == PollAdapter.MY_REQUEST_CODE) {
@@ -174,7 +174,6 @@ public class PollActivity extends AppCompatActivity
             if (questionPos != -1) {
                 Question q = adapter.getPollList().get(questionPos);
                 String answerKey = data.getStringExtra(PollActivity.ANSWER_INDEX);
-                Log.d("ANSWER_KEY", answerKey);
                 final HashMap<String, Answer> answers = q.getAnswers();
                 answers.get(answerKey).setNumAnswers(answers.get(answerKey).getNumAnswers() + 1);
 
@@ -187,8 +186,6 @@ public class PollActivity extends AppCompatActivity
                 adapter.pollRef.child("polls").child(q.getKey()).setValue(q);
                 adapter.notifyItemChanged(questionPos);
 
-            } else {
-                Log.d("GETTING POSITION FAILED", "BOOOOOOOOO");
             }
         }
     }

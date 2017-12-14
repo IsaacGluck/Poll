@@ -41,13 +41,6 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-//        displayUsername(currentUser);
-//    }
-
     @OnClick(R.id.btnRegister)
     void registerClick() {
         if (!isFormValid()) {
@@ -71,13 +64,12 @@ public class LoginActivity extends AppCompatActivity {
                             displayUsername(user);
 
                             Toast.makeText(LoginActivity.this,
-                                    "Registration ok", Toast.LENGTH_SHORT).show();
+                                    R.string.RegistrationOK, Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(LoginActivity.this,
-                                    "Authentication failed. Error: "
+                                    getString(R.string.AuthenticationFailed)
                                             + task.getException().getMessage(),
                                     Toast.LENGTH_LONG).show();
-//                            displayUsername(null);
                         }
                     }
                 });
@@ -105,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 } else {
                     Toast.makeText(LoginActivity.this,
-                            "Error: "+task.getException().getMessage(),
+                            getString(R.string.Error)+task.getException().getMessage(),
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -122,12 +114,12 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean isFormValid() {
         if (TextUtils.isEmpty(etEmail.getText())) {
-            etEmail.setError("The email can not be empty");
+            etEmail.setError(getString(R.string.EmailCannotBeEmpty));
             return false;
         }
 
         if (TextUtils.isEmpty(etPassword.getText())) {
-            etPassword.setError("The password can not be empty");
+            etPassword.setError(getString(R.string.PasswordCannotBeEmpty));
             return false;
         }
 
@@ -137,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
     private void showProgressDialog() {
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage("Hold On...");
+            progressDialog.setMessage(getString(R.string.HoldOn));
         }
 
         progressDialog.show();

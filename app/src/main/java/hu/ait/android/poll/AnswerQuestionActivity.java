@@ -39,6 +39,8 @@ public class AnswerQuestionActivity extends AppCompatActivity {
     private static final int RB3_ID = 2;
     private static final int RB4_ID = 3;
 
+    private static final String ANSWER_INDEX = "AnswerIndex";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +75,7 @@ public class AnswerQuestionActivity extends AppCompatActivity {
 
                 if (checkedRadioIndex == -1) {
                     Snackbar.make(layout,
-                            "Please select an answer",
+                            R.string.PleaseSelectAnAnswer,
                             Snackbar.LENGTH_LONG
                     ).setAction(R.string.Hide, new View.OnClickListener() {
                         @Override
@@ -81,11 +83,10 @@ public class AnswerQuestionActivity extends AppCompatActivity {
                             //...
                         }
                     }).show();
-                    Log.d("GETTING POSITION FAILED", "BOOOOOOOOO");
                     return;
                 }
 
-                String answerKey = "AnswerIndex" + checkedRadioIndex;
+                String answerKey = ANSWER_INDEX + checkedRadioIndex;
 
                 Intent intentResult = new Intent();
                 intentResult.putExtra(PollActivity.HOLDER_POSITION, getIntent().getIntExtra(PollActivity.HOLDER_POSITION, -1));
