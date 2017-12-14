@@ -81,7 +81,6 @@ public class CreatePollActivity extends AppCompatActivity {
         HashMap<String, String> answeredBy = new HashMap<>();
 
         String key = FirebaseDatabase.getInstance().getReference().child(PollActivity.POLLS).push().getKey();
-        Log.d("AUTHOR", FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
         Question newQuestion = new Question(
                 FirebaseAuth.getInstance().getCurrentUser().getUid(),
                 key,
