@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,11 +28,6 @@ import hu.ait.android.poll.data.Question;
 
 
 public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
-
-    private static final int RB1_ID = 0;
-    private static final int RB2_ID = 1;
-    private static final int RB3_ID = 2;
-    private static final int RB4_ID = 3;
     public static final int MY_REQUEST_CODE = 1234;
 
     private Context context;
@@ -42,18 +35,16 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
     private List<String> pollKeys;
     private String uId;
     public FirebaseUser user;
-    private int lastPosition = -1;
     public DatabaseReference pollRef;
 
     public PollAdapter(Context context, String uId) {
         this.context = context;
         this.uId = uId;
 
+        pollList = new ArrayList<>();
+        pollKeys = new ArrayList<>();
+
         user = FirebaseAuth.getInstance().getCurrentUser();
-
-        pollList = new ArrayList<Question>();
-        pollKeys = new ArrayList<String>();
-
         pollRef = FirebaseDatabase.getInstance().getReference();
     }
 
@@ -81,9 +72,6 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
         holder.question = question.getQuestion();
         holder.intent = null;
         holder.position = position;
-
-        final DatabaseReference database = this.pollRef;
-        final FirebaseUser userKey = this.user;
 
         boolean hasAnswered = false;
         if (this.pollList.get(position).getAnsweredBy() != null) {
@@ -114,7 +102,7 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
                     context.startActivity(intent);
                 }
             });
-            holder.btnSubmit.setText("View Results");
+            holder.btnSubmit.setText(R.string.view_results);
         } else {
             holder.btnSubmit.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -146,10 +134,6 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void submitAnswer() {
-
-    }
-
     @Override
     public int getItemCount() { return pollList.size(); }
 
@@ -163,10 +147,10 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
         public String answer4;
         public String author;
         public String question;
-        Intent intent;
-        public int position;
         public Button btnSubmit;
         public Button btnDelete;
+        public Intent intent;
+        public int position;
 
         public ViewHolder(View itemView) {
             super(itemView);
