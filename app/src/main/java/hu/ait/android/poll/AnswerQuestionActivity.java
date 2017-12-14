@@ -49,7 +49,6 @@ public class AnswerQuestionActivity extends AppCompatActivity {
         radioAnswer3 = findViewById(R.id.radioAnswer3);
         radioAnswer4 = findViewById(R.id.radioAnswer4);
         btnSubmit = findViewById(R.id.btnSubmitAnswer);
-        btnDelete = findViewById(R.id.btnDelete);
         layout = findViewById(R.id.card_view);
 
         radioAnswer1.setText(getIntent().getStringExtra(PollActivity.ANSWER_INDEX_0));

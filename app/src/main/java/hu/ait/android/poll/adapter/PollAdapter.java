@@ -148,7 +148,6 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
         public String author;
         public String question;
         public Button btnSubmit;
-        public Button btnDelete;
         public Intent intent;
         public int position;
 
@@ -158,7 +157,6 @@ public class PollAdapter extends RecyclerView.Adapter<PollAdapter.ViewHolder> {
             tvAuthor = itemView.findViewById(R.id.tvAuthor);
             tvQuestion = itemView.findViewById(R.id.tvQuestion);
             btnSubmit = itemView.findViewById(R.id.btnSubmitAnswer);
-            btnDelete = itemView.findViewById(R.id.btnDelete);
         }
     }
 }
